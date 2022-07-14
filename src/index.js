@@ -1,6 +1,17 @@
 import './index.css';
 
-const todos = JSON.parse(localStorage.getItem('todos')) || []; // localstorage with array
+const todos = JSON.parse(localStorage.getItem('todos')) || [
+  {
+    description: 'Going to gym',
+    completed: false,
+    id: new Date().getTime(),
+  },
+  {
+    description: 'visite th doctor',
+    completed: false,
+    id: new Date().getTime(),
+  },
+]; // localstorage with array
 
 const DisplayTodos = () => {
   const todoList = document.querySelector('#todo-list');
@@ -72,7 +83,7 @@ window.addEventListener('load', () => {
 
 const reload = () => {
   document.querySelector('#reload').addEventListener('click', () => {
-    location.reload();// eslint-disable-line
+    location.reload(); // eslint-disable-line
   });
 };
 reload();
