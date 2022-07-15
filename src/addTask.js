@@ -1,4 +1,4 @@
-import { todos, DisplayTodos } from './index.js';// eslint-disable-line
+import { todos, DisplayTodos } from './index.js'; // eslint-disable-line
 
 const newTodoForm = document.querySelector('#new-todo-form');
 const submit = () => {
@@ -8,7 +8,7 @@ const submit = () => {
       description: e.target.elements.content.value,
       completed: false,
       id: Date.now(),
-      index:todos.length +1,
+      index: todos.length + 1,
     };
     todos.push(todo);
 
