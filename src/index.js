@@ -81,7 +81,6 @@ export const DisplayTodos = () => {
           JSON.parse(e.target.parentElement.parentElement.getAttribute('data-id')),
         );
         DisplayTodos();
-        document.getElementById('todo-list');
         document.location.reload();
       }
       deleteTask();

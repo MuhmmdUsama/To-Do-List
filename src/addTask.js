@@ -8,6 +8,7 @@ const submit = () => {
       description: e.target.elements.content.value,
       completed: false,
       id: Date.now(),
+      index:todos.length +1,
     };
     todos.push(todo);
 
