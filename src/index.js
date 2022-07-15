@@ -1,5 +1,5 @@
 import './index.css';
-import deleteTask from './action.js';// eslint-disable-line
+import {deleteTask, clearCompleted} from './action.js';// eslint-disable-line
 import submit from './addTask.js';// eslint-disable-line
 
 export const todos = JSON.parse(localStorage.getItem('todos')) || []; // localstorage with array
@@ -85,7 +85,7 @@ export const DisplayTodos = () => {
       }
       deleteTask();
     });
-    // clearCompleted();
+    clearCompleted();
   });
 };
 
