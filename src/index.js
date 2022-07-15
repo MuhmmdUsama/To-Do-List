@@ -1,25 +1,17 @@
 import './index.css';
+import deleteTask from './action.js';// eslint-disable-line
+import submit from './addTask.js';// eslint-disable-line
 
-const todos = JSON.parse(localStorage.getItem('todos')) || [
-  {
-    description: 'Going to gym',
-    completed: false,
-    id: new Date().getTime(),
-  },
-  {
-    description: 'visite th doctor',
-    completed: false,
-    id: new Date().getTime(),
-  },
-]; // localstorage with array
+export const todos = JSON.parse(localStorage.getItem('todos')) || []; // localstorage with array
+export const todoList = document.querySelector('#todo-list');
 
-const DisplayTodos = () => {
-  const todoList = document.querySelector('#todo-list');
+export const DisplayTodos = () => {
   todoList.innerHTML = '';
 
   todos.forEach((todo) => {
     const todoItem = document.createElement('div');
     todoItem.classList.add('todo-item');
+    todoItem.setAttribute('data-id', todo.id);
 
     const label = document.createElement('label');
     const input = document.createElement('input');
@@ -51,28 +43,49 @@ const DisplayTodos = () => {
     todoItem.appendChild(actions);
 
     todoList.appendChild(todoItem);
-  });
-};
 
-const newTodoForm = document.querySelector('#new-todo-form');
-const submit = () => {
-  newTodoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    if (todo.completed) {
+      todoItem.classList.add('done');
+    }
 
-    const todo = {
-      description: e.target.elements.content.value,
-      completed: false,
-      id: new Date().getTime(),
-    };
+    input.addEventListener('change', (e) => {
+      todo.completed = e.target.checked;
+      localStorage.setItem('todos', JSON.stringify(todos));
 
-    todos.push(todo);
+      if (todo.completed) {
+        todoItem.classList.add('done');
+      } else {
+        todoItem.classList.remove('done');
+      }
+      DisplayTodos();
+    });
 
-    localStorage.setItem('todos', JSON.stringify(todos));
+    edit.addEventListener('click', () => {
+      const input = content.querySelector('input');
+      input.removeAttribute('readonly');
+      input.focus();
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          input.setAttribute('readonly', true);
+          todo.description = e.target.value;
+          localStorage.setItem('todos', JSON.stringify(todos));
+          DisplayTodos();
+        }
+      });
+    });
 
-    // Reset the form
-    e.target.reset();
-
-    DisplayTodos();
+    deleteButton.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete')) {
+        e.target.parentElement.parentElement.remove();
+        deleteTask(
+          JSON.parse(e.target.parentElement.parentElement.getAttribute('data-id')),
+        );
+        DisplayTodos();
+        document.location.reload();
+      }
+      deleteTask();
+    });
+    // clearCompleted();
   });
 };
 
@@ -83,7 +96,7 @@ window.addEventListener('load', () => {
 
 const reload = () => {
   document.querySelector('#reload').addEventListener('click', () => {
-    location.reload(); // eslint-disable-line
+    document.location.reload(); // eslint-disable-line
   });
 };
 reload();

@@ -215,6 +215,10 @@ input:checked ~ .bubble::after {
   background: var(--grey);
 }
 
+.fa-trash {
+  pointer-events: none;
+}
+
 .clear-all {
   border: none;
   background: none;
