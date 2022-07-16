@@ -13,10 +13,11 @@
 
 To get a local copy up and running follow these simple example steps:
 
-- [Copy this link](git@github.com:MuhmmdUsama/To-Do-List.git)
+- [Download](https://github.com/MuhmmdUsama/To-Do-List/archive/refs/heads/main.zip)
 - Open your terminal or command line
 - Run `git clone` and Paste the link
 - After the clone, type in the command `cd To-Do-List` to access the directory on the terminal
+- run `npm install`.
 - Run `npm run start` and it will automatically load in your browser
 
 ##👤 Author

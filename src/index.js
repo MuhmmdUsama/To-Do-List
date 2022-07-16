@@ -1,6 +1,7 @@
 import './index.css';
-import deleteTask from './action.js';// eslint-disable-line
+import {deleteTask, clearCompleted} from './action.js';// eslint-disable-line
 import submit from './addTask.js';// eslint-disable-line
+import change from './change.js';// eslint-disable-line
 
 export const todos = JSON.parse(localStorage.getItem('todos')) || []; // localstorage with array
 export const todoList = document.querySelector('#todo-list');
@@ -21,6 +22,7 @@ export const DisplayTodos = () => {
     const edit = document.createElement('button');
     const deleteButton = document.createElement('button');
 
+    // input.classList.add('checkbox');
     input.type = 'checkbox';
     input.checked = todo.completed;
     span.classList.add('bubble');
@@ -47,16 +49,10 @@ export const DisplayTodos = () => {
     if (todo.completed) {
       todoItem.classList.add('done');
     }
-
     input.addEventListener('change', (e) => {
+      document.location.reload();
       todo.completed = e.target.checked;
-      localStorage.setItem('todos', JSON.stringify(todos));
-
-      if (todo.completed) {
-        todoItem.classList.add('done');
-      } else {
-        todoItem.classList.remove('done');
-      }
+      change();
       DisplayTodos();
     });
 
@@ -85,7 +81,7 @@ export const DisplayTodos = () => {
       }
       deleteTask();
     });
-    // clearCompleted();
+    clearCompleted();
   });
 };
 
